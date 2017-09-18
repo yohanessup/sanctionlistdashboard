@@ -8,7 +8,14 @@
 
 require APPPATH . 'libraries/REST_Controller.php';
 
-class employee extends REST_Controller {
+class Employee extends REST_Controller {
+
+    var $data = array();
+
+    function setData($rec_data)
+    {
+        $this->data = $rec_data;
+    }
 
     function __construct($config = 'rest') {
         parent::__construct($config);
@@ -33,7 +40,7 @@ class employee extends REST_Controller {
     // insert new employee data
     function index_post() {
 
-        $data = array(
+        $dataPost = array(
             'first_name'           => $this->post('first_name'),
             'last_name'          => $this->post('last_name'),
             'email'    => $this->post('email'),
@@ -42,7 +49,7 @@ class employee extends REST_Controller {
 
         $this->load->model('Employee_model');
 
-        $this->Employee_model->set_data_post($data);
+        $this->Employee_model->set_data_post($dataPost);
 
         $insert = $this->Employee_model->post_data();
 
@@ -61,16 +68,16 @@ class employee extends REST_Controller {
     // update employee data
     function index_put() {
         $emp_id = $this->put('id');
-        $data = array(
+        $dataUpdate = array(
             'first_name'       => $this->put('first_name'),
             'last_name'      => $this->put('last_name'),
-            'email'=> $this->put('email'),
+            'email' => $this->put('email'),
             'gender'    => $this->put('gender'),
             'phone_number'    => $this->put('phone_number'));
         $this->load->model('Employee_model');
 
         $this->Employee_model->set_id($emp_id);
-        $this->Employee_model->set_data_update($data);
+        $this->Employee_model->set_data_update($dataUpdate);
 
         $update = $this->Employee_model->update_data();
 
@@ -86,7 +93,7 @@ class employee extends REST_Controller {
         }
     }
 
-    // delete employee data
+    // delete existing employee data
     function index_delete() {
         $emp_id = $this->delete('id');
         $this->load->model('Employee_model');

@@ -12,6 +12,8 @@ class Employee_model extends CI_Model{
 
     var $dataUpdate = array();
 
+    const tableName = 'employees';
+
     var $id;
 
     function set_data_post($data_post) {
@@ -27,33 +29,39 @@ class Employee_model extends CI_Model{
     }
 
     function get_all_data() {
-        $query = $this->db->get('employees');
+        $query = $this->db->get($this::tableName);
 
         return $query->result();
     }
 
+    function get_data() {
+        $query = $this->db->get($this::tableName);
+
+        return $query->result_array();
+    }
+
     function get_specific_data() {
         $this->db->where('id', $this->id);
-        $query = $this->db->get('employees');
+        $query = $this->db->get($this::tableName);
 
         return $query->result();
     }
 
     function post_data() {
-        $insert = $this->db->insert('employees', $this->dataPost);
+        $insert = $this->db->insert($this::tableName, $this->dataPost);
 
         return $insert;
     }
 
     function update_data() {
         $this->db->where('id', $this->id);
-        $update = $this->db->update('employees', $this->dataUpdate);
+        $update = $this->db->update($this::tableName, $this->dataUpdate);
 
         return $update;
     }
 
     function delete_data() {
-        $delete = $this->db->delete('employees',  array('id' => $this->id));
+        $delete = $this->db->delete($this::tableName,  array('id' => $this->id));
 
         return $delete;
     }
