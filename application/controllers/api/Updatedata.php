@@ -21,6 +21,7 @@ class Updatedata extends REST_Controller
 // before updating the data, move the old data to the other table "oldlist"
     function index_put()
     {
+        //set default timezone
         date_default_timezone_set('Asia/Jakarta');
         $timeUpdate = date('Y-m-d H:i:s');
 
@@ -58,8 +59,24 @@ class Updatedata extends REST_Controller
         $this->Sanctionlist_model->set_action('update');
         $this->Sanctionlist_model->set_user($dataUpdate['updated_by']);
 
+        //check if data to be updated is exist
+        $dataToUpd = $this->Sanctionlist_model->get_specific_data();
+
+        $errMsg = array(
+            'code' => '1001',
+            'message' => 'Error: Data Not Found'
+        );
+
+        //return error message if data is not exist
+        if (empty($dataToUpd)) {
+            $this->response($errMsg, 200);
+            return;
+        }
+
+        //move the data before update to another table
         $this->Sanctionlist_model->move_data();
 
+        //process updating the data
         $update = $this->Sanctionlist_model->update_data();
 
         $confirmation = array(
