@@ -242,7 +242,7 @@ class CI_Form_validation {
 			'errors'	=> $errors,
 			'is_array'	=> $is_array,
 			'keys'		=> $indexes,
-			'postdata'	=> NULL,
+			'Insertrequestpost' => NULL,
 			'error'		=> ''
 		);
 
@@ -456,11 +456,11 @@ class CI_Form_validation {
 			// Depending on whether the field name is an array or a string will determine where we get it from.
 			if ($row['is_array'] === TRUE)
 			{
-				$this->_field_data[$field]['postdata'] = $this->_reduce_array($validation_array, $row['keys']);
+				$this->_field_data[$field]['Insertrequestpost'] = $this->_reduce_array($validation_array, $row['keys']);
 			}
 			elseif (isset($validation_array[$field]))
 			{
-				$this->_field_data[$field]['postdata'] = $validation_array[$field];
+				$this->_field_data[$field]['Insertrequestpost'] = $validation_array[$field];
 			}
 		}
 
@@ -475,7 +475,7 @@ class CI_Form_validation {
 				continue;
 			}
 
-			$this->_execute($row, $row['rules'], $row['postdata']);
+			$this->_execute($row, $row['rules'], $row['Insertrequestpost']);
 		}
 
 		// Did we end up with any errors?
@@ -580,11 +580,11 @@ class CI_Form_validation {
 	{
 		foreach ($this->_field_data as $field => $row)
 		{
-			if ($row['postdata'] !== NULL)
+			if ($row['Insertrequestpost'] !== NULL)
 			{
 				if ($row['is_array'] === FALSE)
 				{
-					isset($_POST[$field]) && $_POST[$field] = $row['postdata'];
+					isset($_POST[$field]) && $_POST[$field] = $row['Insertrequestpost'];
 				}
 				else
 				{
@@ -604,7 +604,7 @@ class CI_Form_validation {
 						}
 					}
 
-					$post_ref = $row['postdata'];
+					$post_ref = $row['Insertrequestpost'];
 				}
 			}
 		}
@@ -644,16 +644,16 @@ class CI_Form_validation {
 
 			// We set the $postdata variable with the current data in our master array so that
 			// each cycle of the loop is dealing with the processed data from the last cycle
-			if ($row['is_array'] === TRUE && is_array($this->_field_data[$row['field']]['postdata']))
+			if ($row['is_array'] === TRUE && is_array($this->_field_data[$row['field']]['Insertrequestpost']))
 			{
 				// We shouldn't need this safety, but just in case there isn't an array index
 				// associated with this cycle we'll bail out
-				if ( ! isset($this->_field_data[$row['field']]['postdata'][$cycles]))
+				if ( ! isset($this->_field_data[$row['field']]['Insertrequestpost'][$cycles]))
 				{
 					continue;
 				}
 
-				$postdata = $this->_field_data[$row['field']]['postdata'][$cycles];
+				$postdata = $this->_field_data[$row['field']]['Insertrequestpost'][$cycles];
 				$_in_array = TRUE;
 			}
 			else
@@ -661,9 +661,9 @@ class CI_Form_validation {
 				// If we get an array field, but it's not expected - then it is most likely
 				// somebody messing with the form on the client side, so we'll just consider
 				// it an empty field
-				$postdata = is_array($this->_field_data[$row['field']]['postdata'])
+				$postdata = is_array($this->_field_data[$row['field']]['Insertrequestpost'])
 					? NULL
-					: $this->_field_data[$row['field']]['postdata'];
+					: $this->_field_data[$row['field']]['Insertrequestpost'];
 			}
 
 			// Is the rule a callback?
@@ -739,11 +739,11 @@ class CI_Form_validation {
 				// Re-assign the result to the master data array
 				if ($_in_array === TRUE)
 				{
-					$this->_field_data[$row['field']]['postdata'][$cycles] = is_bool($result) ? $postdata : $result;
+					$this->_field_data[$row['field']]['Insertrequestpost'][$cycles] = is_bool($result) ? $postdata : $result;
 				}
 				else
 				{
-					$this->_field_data[$row['field']]['postdata'] = is_bool($result) ? $postdata : $result;
+					$this->_field_data[$row['field']]['Insertrequestpost'] = is_bool($result) ? $postdata : $result;
 				}
 			}
 			elseif ( ! method_exists($this, $rule))
@@ -757,11 +757,11 @@ class CI_Form_validation {
 
 					if ($_in_array === TRUE)
 					{
-						$this->_field_data[$row['field']]['postdata'][$cycles] = is_bool($result) ? $postdata : $result;
+						$this->_field_data[$row['field']]['Insertrequestpost'][$cycles] = is_bool($result) ? $postdata : $result;
 					}
 					else
 					{
-						$this->_field_data[$row['field']]['postdata'] = is_bool($result) ? $postdata : $result;
+						$this->_field_data[$row['field']]['Insertrequestpost'] = is_bool($result) ? $postdata : $result;
 					}
 				}
 				else
@@ -776,11 +776,11 @@ class CI_Form_validation {
 
 				if ($_in_array === TRUE)
 				{
-					$this->_field_data[$row['field']]['postdata'][$cycles] = is_bool($result) ? $postdata : $result;
+					$this->_field_data[$row['field']]['Insertrequestpost'][$cycles] = is_bool($result) ? $postdata : $result;
 				}
 				else
 				{
-					$this->_field_data[$row['field']]['postdata'] = is_bool($result) ? $postdata : $result;
+					$this->_field_data[$row['field']]['Insertrequestpost'] = is_bool($result) ? $postdata : $result;
 				}
 			}
 
@@ -924,19 +924,19 @@ class CI_Form_validation {
 	 */
 	public function set_value($field = '', $default = '')
 	{
-		if ( ! isset($this->_field_data[$field], $this->_field_data[$field]['postdata']))
+		if ( ! isset($this->_field_data[$field], $this->_field_data[$field]['Insertrequestpost']))
 		{
 			return $default;
 		}
 
 		// If the data is an array output them one at a time.
 		//	E.g: form_input('name[]', set_value('name[]');
-		if (is_array($this->_field_data[$field]['postdata']))
+		if (is_array($this->_field_data[$field]['Insertrequestpost']))
 		{
-			return array_shift($this->_field_data[$field]['postdata']);
+			return array_shift($this->_field_data[$field]['Insertrequestpost']);
 		}
 
-		return $this->_field_data[$field]['postdata'];
+		return $this->_field_data[$field]['Insertrequestpost'];
 	}
 
 	// --------------------------------------------------------------------
@@ -954,12 +954,12 @@ class CI_Form_validation {
 	 */
 	public function set_select($field = '', $value = '', $default = FALSE)
 	{
-		if ( ! isset($this->_field_data[$field], $this->_field_data[$field]['postdata']))
+		if ( ! isset($this->_field_data[$field], $this->_field_data[$field]['Insertrequestpost']))
 		{
 			return ($default === TRUE && count($this->_field_data) === 0) ? ' selected="selected"' : '';
 		}
 
-		$field = $this->_field_data[$field]['postdata'];
+		$field = $this->_field_data[$field]['Insertrequestpost'];
 		$value = (string) $value;
 		if (is_array($field))
 		{
@@ -997,12 +997,12 @@ class CI_Form_validation {
 	 */
 	public function set_radio($field = '', $value = '', $default = FALSE)
 	{
-		if ( ! isset($this->_field_data[$field], $this->_field_data[$field]['postdata']))
+		if ( ! isset($this->_field_data[$field], $this->_field_data[$field]['Insertrequestpost']))
 		{
 			return ($default === TRUE && count($this->_field_data) === 0) ? ' checked="checked"' : '';
 		}
 
-		$field = $this->_field_data[$field]['postdata'];
+		$field = $this->_field_data[$field]['Insertrequestpost'];
 		$value = (string) $value;
 		if (is_array($field))
 		{
@@ -1084,8 +1084,8 @@ class CI_Form_validation {
 	 */
 	public function matches($str, $field)
 	{
-		return isset($this->_field_data[$field], $this->_field_data[$field]['postdata'])
-			? ($str === $this->_field_data[$field]['postdata'])
+		return isset($this->_field_data[$field], $this->_field_data[$field]['Insertrequestpost'])
+			? ($str === $this->_field_data[$field]['Insertrequestpost'])
 			: FALSE;
 	}
 
@@ -1100,7 +1100,7 @@ class CI_Form_validation {
 	 */
 	public function differs($str, $field)
 	{
-		return ! (isset($this->_field_data[$field]) && $this->_field_data[$field]['postdata'] === $str);
+		return ! (isset($this->_field_data[$field]) && $this->_field_data[$field]['Insertrequestpost'] === $str);
 	}
 
 	// --------------------------------------------------------------------

@@ -20,9 +20,19 @@ class Sanctionlist_model extends CI_Model{
 
     var $user;
 
-    const tableName = 'list';
+    var $fullName;
 
-    const oldTableName = 'oldlist';
+    var $birthDate;
+
+    var $approvedTime;
+
+    var $approvedBy;
+
+    const tableName = 'approved';
+
+    const oldTableName = 'log';
+
+    const newTableName = 'pending';
 
     var $id;
 
@@ -54,57 +64,91 @@ class Sanctionlist_model extends CI_Model{
         $this->user = $user;
     }
 
+    function set_approved_time($app_time) {
+        $this->approvedTime = $app_time;
+    }
+
+    function set_approved_by($app_by) {
+        $this->approvedBy = $app_by;
+    }
+
+    function set_birthdate($bdate){
+        $this->birthDate = $bdate;
+    }
+
+    function set_fullname($fullname){
+        $this->fullName = $fullname;
+    }
+
     function get_all_data() {
         $query = $this->db->get($this::tableName);
 
         return $query->result();
     }
 
-    function get_data() {
-        $query = $this->db->get($this::tableName);
-
-        return $query->result_array();
-    }
-
-    function get_specific_data() {
-        $this->db->where('rec_id', $this->id);
+    function get_pending_data() {
+        $this->db->where('list_id', $this->id);
         $query = $this->db->get($this::tableName);
 
         return $query->result();
     }
 
-    function post_data() {
-        $insert = $this->db->insert($this::tableName, $this->dataPost);
+    function post_pending_data() {
+        $table = $this::newTableName;
+        $insert = $this->db->insert($table, $this->dataPost);
+
+        return $insert;
+    }
+
+    function post_approved_data() {
+        $table = $this::tableName;
+        $insert = $this->db->insert($table, $this->dataPost);
+
+        return $insert;
+    }
+
+    function post_log_data() {
+        $table = $this::oldTableName;
+        $insert = $this->db->insert($table, $this->dataPost);
 
         return $insert;
     }
 
     function update_data() {
-        $this->db->where('rec_id', $this->id);
+        $this->db->where('list_id', $this->id);
         $update = $this->db->update($this::tableName, $this->dataUpdate);
 
         return $update;
     }
 
-    function move_data() {
-        $this->db->where('rec_id', $this->id);
-        $q = $this->db->get($this::tableName)->result();
+    function insert_to_log() {
+        $this->db->where('list_id', $this->id);
+        $q = $this->db->get($this::newTableName)->result();
         foreach($q as $r) {
             $data = array(
                 'list_id'           => $r->list_id,
                 'full_name'          => $r->full_name,
+                'email'             => $r->email,
                 'phone_number'    => $r->phone_number,
                 'birthdate'        => $r->birthdate,
                 'gender' => $r->gender,
-                'created_at' => $this->timeUpdate,
-                'user' => $this->user,
-                'action' => $this->action);
+                'input_time' => $r->input_time,
+                'input_by' => $r->input_by,
+                'approved_time' => $this->approvedTime,
+                'approved_by' => $this->approvedBy,
+                'action_type' => $this->action);
             $this->db->insert($this::oldTableName, $data);
         }
     }
 
     function delete_data() {
-        $delete = $this->db->delete($this::tableName,  array('rec_id' => $this->id));
+        $delete = $this->db->delete($this::tableName,  array('list_id' => $this->id));
+
+        return $delete;
+    }
+
+    function delete_pending() {
+        $delete = $this->db->delete($this::newTableName,  array('list_id' => $this->id));
 
         return $delete;
     }
@@ -112,6 +156,27 @@ class Sanctionlist_model extends CI_Model{
     function match_data(){
         $this->db->where($this->dataSearch);
         $query = $this->db->get($this::tableName);
+
+        return $query->result();
+    }
+
+    function check_data_temp() {
+        $this->db->where($this->dataSearch);
+        $query = $this->db->get($this::newTableName);
+
+        return $query->result();
+    }
+
+    function check_data_orig() {
+        $this->db->where($this->dataSearch);
+        $query = $this->db->get($this::tableName);
+
+        return $query->result();
+    }
+
+    function check_id_data_temp() {
+        $this->db->where('list_id', $this->id);
+        $query = $this->db->get($this::newTableName);
 
         return $query->result();
     }
