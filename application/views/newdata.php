@@ -87,10 +87,6 @@
                     <input type="email" name="email" class="form-control" id="inputEmail" placeholder="name@example.com">
                 </div>
                 <div class="form-group">
-                    <label for="inputPhoneNumber">Customer Phone Number</label>
-                    <input type="text" name="phone_number" class="form-control" id="inputPhoneNumber" onkeypress="return isNumber(event)" placeholder="number only">
-                </div>
-                <div class="form-group">
                     <label for="dtp_input2">Customer Birthdate</label>
                     <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                         <input class="form-control" size="16" type="text" value="" readonly>
@@ -98,6 +94,10 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                     <input type="hidden" name="birthdate" id="dtp_input2" value="" /><br/>
+                </div>
+                <div class="form-group">
+                    <label for="inputPhoneNumber">Customer Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control" id="inputPhoneNumber" onkeypress="return isNumber(event)" placeholder="number only">
                 </div>
                 <div class="form-group">
                     <label for="inputGender">Customer Gender</label>
