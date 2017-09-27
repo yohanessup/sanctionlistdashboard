@@ -15,12 +15,11 @@ class Insertrequestpost extends REST_Controller {
     }
 
     function index_post() {
-        $list_id = md5(microtime());
         date_default_timezone_set('Asia/Jakarta');
         $createdTime = date('Y-m-d H:i:s');
 
         $dataPost = array(
-            'list_id'           => $list_id,
+            'list_id'           => $this->post('list_id'),
             'full_name'          => $this->post('full_name'),
             'email'             => $this->post('email'),
             'phone_number'    => $this->post('phone_number'),

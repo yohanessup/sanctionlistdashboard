@@ -11,13 +11,14 @@
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" media="screen">
+    <link href="<?php echo base_url('assets/css/bootstrap-datetimepicker.min.css'); ?>" rel="stylesheet" media="screen">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/ie10-viewport-bug-workaround.css'); ?>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../assets/css/dashboard.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/dashboard.css'); ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -40,9 +41,9 @@
             <a class="navbar-brand" href="#">Sanction List</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <!--<ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Help</a></li>
-            </ul>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo base_url('sanction/logout'); ?>">Logout</a></li>
+            </ul>
             <!--<form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
             </form>-->
@@ -54,9 +55,9 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Show All Data <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="<?php echo base_url(); ?>">Show All Data <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Show Certain Data</a></li>
-                <li><a href="#">Save New Data</a></li>
+                <li><a href="<?php echo base_url('sanction/baru'); ?>">Save New Data</a></li>
                 <li><a href="#">Modify Data</a></li>
                 <li><a href="#">Delete Data</a></li>
             </ul>
@@ -74,20 +75,40 @@
             <!--            </ul>-->
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Store New Customer Data</h1>
-            <?php echo form_open_multipart('kontak/create');?>
-            <table>
-                <tr><td>Full Name: </td><td><?php echo form_input('nama');?></td></tr>
-                <tr><td>Birthdate: </td><td><?php echo form_input('nomor');?></td></tr>
-                <tr><td colspan="2">
-                        <?php echo form_submit('submit','Simpan');?>
-                        <?php echo anchor('kontak','Kembali');?></td></tr>
-            </table>
-            <?php
-            echo form_close();
-            ?>
-
-
+            <h1 class="page-header">Insert New Customer Data</h1>
+            <?php echo form_open('sanction/baru'); ?>
+            <form>
+                <div class="form-group">
+                    <label for="inputFullname">Customer Full Name</label>
+                    <input type="text" name="full_name" class="form-control" id="inputFullname" placeholder="customer full name">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Customer Email</label>
+                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="inputPhoneNumber">Customer Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control" id="inputPhoneNumber" onkeypress="return isNumber(event)" placeholder="number only">
+                </div>
+                <div class="form-group">
+                    <label for="dtp_input2">Customer Birthdate</label>
+                    <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" name="birthdate" id="dtp_input2" value="" /><br/>
+                </div>
+                <div class="form-group">
+                    <label for="inputGender">Customer Gender</label>
+                    <select class="form-control" id="inputGender" name="gender">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <button name="submit" type="submit" class="btn btn-default">Submit Data</button>
+            </form>
+            <?php echo form_close(); ?>
 
         </div>
     </div>
@@ -97,11 +118,36 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../assets/js/bootstrap.min.js"></script>
+<script>window.jQuery || document.write('<script src="<?php echo base_url('assets/js/vendor/jquery.min.js'); ?>"><\/script>')</script>
+<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="../assets/js/holder.min.js"></script>
+<script src="<?php echo base_url('assets/js/holder.min.js'); ?>"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="<?php echo base_url('assets/js/ie10-viewport-bug-workaround.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery-1.8.3.min.js'); ?>" charset="UTF-8"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap-datetimepicker.js'); ?>" charset="UTF-8"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/locales/bootstrap-datetimepicker.us.js'); ?>" charset="UTF-8"></script>
+<script type="text/javascript">
+
+    $('.form_date').datetimepicker({
+        language:  'us',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>

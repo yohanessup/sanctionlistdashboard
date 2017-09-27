@@ -24,11 +24,15 @@ class Sanctionlist_model extends CI_Model{
 
     var $birthDate;
 
+    var $userLoginData;
+
     var $approvedTime;
 
     var $approvedBy;
 
     const tableName = 'approved';
+
+    const userTable = 'user';
 
     const oldTableName = 'log';
 
@@ -64,6 +68,10 @@ class Sanctionlist_model extends CI_Model{
         $this->user = $user;
     }
 
+    function set_userlogin_data($user) {
+        $this->userLoginData = $user;
+    }
+
     function set_approved_time($app_time) {
         $this->approvedTime = $app_time;
     }
@@ -89,6 +97,13 @@ class Sanctionlist_model extends CI_Model{
     function get_pending_data() {
         $this->db->where('list_id', $this->id);
         $query = $this->db->get($this::tableName);
+
+        return $query->result();
+    }
+
+    function get_user_data() {
+        $this->db->where($this->userLoginData);
+        $query = $this->db->get($this::userTable);
 
         return $query->result();
     }
