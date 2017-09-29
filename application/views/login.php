@@ -36,8 +36,7 @@
       <?php echo form_open('sanction'); ?>
       <form class="form-signin">
           <img src="<?php echo base_url('assets/images/futuready.png'); ?>" width="190px" height="48px">
-          <h1>Sanction List System</h1>
-          <h2 class="form-signin-heading">Please sign in</h2>
+          <div style="margin-bottom: 20px;"> <h1>Sanction List System</h1></div>
           <label for="inputUserId" class="sr-only">User ID/E-mail address</label>
           <input type="email" name="user_id" id="inputUserId" class="form-control" placeholder="Your User ID (Email address)" required autofocus>
           <label for="inputPassword" class="sr-only">Password</label>
