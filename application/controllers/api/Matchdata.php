@@ -19,8 +19,7 @@ class Matchdata extends REST_Controller {
     {
         $dataSearch = array(
           'full_name' => $this->get('full_name'),
-          'birthdate' => $this->get('birthdate'),
-          'gender' => $this->get('gender')
+          'birthdate' => $this->get('birthdate')
         );
 
         $this->load->model('Sanctionlist_model');
