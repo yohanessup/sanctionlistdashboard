@@ -44,6 +44,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php echo base_url('sanction/logout'); ?>">logout (<?php echo $this->session->userdata('logged_in')['username']; ?>)</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <div class="digital-clock">00:00:00</div>
+            </ul>
             <!--<form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
             </form>-->
@@ -159,7 +162,61 @@
     $(document).ready(function() {
         var GenderSelected = "<?php Print($custdata[0]->gender); ?>";
         $("#inputGender").val(GenderSelected);
+        clockUpdate();
+        setInterval(clockUpdate, 1000);
     });
+
+    function clockUpdate() {
+        var date = new Date();
+        $('.digital-clock').css({'color': '#fff', 'text-shadow': '0 0 6px #ff0'});
+        function addZero(x) {
+            if (x < 10) {
+                return x = '0' + x;
+            } else {
+                return x;
+            }
+        }
+
+        function twelveHour(x) {
+            if (x > 12) {
+                return x;
+            } else if (x == 0) {
+                return x = 12;
+            } else {
+                return x;
+            }
+        }
+
+        var h = addZero(twelveHour(date.getHours()));
+        var m = addZero(date.getMinutes());
+        var s = addZero(date.getSeconds());
+
+        $('.digital-clock').text(h + ':' + m + ':' + s)
+    }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'Arial';
+    }
+
+    html {
+        height: 100%;
+    }
+
+    .digital-clock {
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100px;
+        height: 30px;
+        color: #ffffff;
+        text-align: center;
+        font: 20px/30px 'DIGITAL', Helvetica;
+    }
+</style>
 </body>
 </html>
