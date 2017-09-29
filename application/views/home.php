@@ -37,7 +37,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Sanction List</a>
+            <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/images/futuready.png'); ?>" width="100px" height="25px"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -73,7 +73,7 @@
 <!--                <li><a href="">Another nav item</a></li>-->
 <!--            </ul>-->
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="min-height: 580px;">
             <?php
             if (isset($message)) {
                 echo "<div class='message' style='color: #204d74'>";
@@ -123,6 +123,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; margin-bottom: 5px;">
+            <img src="<?php echo base_url('assets/images/aegon-ft-logo.png'); ?>">
         </div>
     </div>
 </div>
