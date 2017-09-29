@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sanction List: Main Page</title>
+    <title>Sanction List: Main Page Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
@@ -200,10 +200,10 @@
         bottom: 0;
         right: 0;
         width: 100px;
-        height: 30px;
+        height: 20px;
         color: #ffffff;
         text-align: center;
-        font: 20px/30px 'DIGITAL', Helvetica;
+        font: 16px/21px 'DIGITAL', Helvetica;
     }
 </style>
 </body>

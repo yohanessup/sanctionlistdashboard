@@ -58,8 +58,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="<?php echo base_url(); ?>">Data List <span class="sr-only">(current)</span></a></li>
-                <li><a href="<?php echo base_url('sanction/baru'); ?>">Save New Data</a></li>
+                <li><a href="<?php echo base_url(); ?>">Data List <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="<?php echo base_url('sanction/baru'); ?>">Save New Data</a></li>
             </ul>
             <!--            <ul class="nav nav-sidebar">-->
             <!--                <li><a href="">Nav item</a></li>-->
@@ -208,10 +208,10 @@
         bottom: 0;
         right: 0;
         width: 100px;
-        height: 30px;
+        height: 20px;
         color: #ffffff;
         text-align: center;
-        font: 20px/30px 'DIGITAL', Helvetica;
+        font: 16px/21px 'DIGITAL', Helvetica;
     }
 </style>
 </body>

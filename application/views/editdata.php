@@ -212,10 +212,10 @@
         bottom: 0;
         right: 0;
         width: 100px;
-        height: 30px;
+        height: 20px;
         color: #ffffff;
         text-align: center;
-        font: 20px/30px 'DIGITAL', Helvetica;
+        font: 16px/21px 'DIGITAL', Helvetica;
     }
 </style>
 </body>
