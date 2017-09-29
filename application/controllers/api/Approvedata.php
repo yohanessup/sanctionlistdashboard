@@ -40,7 +40,12 @@ class Approvedata extends REST_Controller {
 
         $confirmation = array(
             'code' => '4001',
-            'message' => 'Insert pending post data to origin table successful'
+            'message' => 'Insert data successful'
+        );
+
+        $errconfirm = array(
+            'code' => '14001',
+            'message' => 'Fail to insert data'
         );
 
         if ($insert) {
@@ -50,7 +55,7 @@ class Approvedata extends REST_Controller {
             $this->Sanctionlist_model->delete_pending();
             $this->response($confirmation, 200);
         } else {
-            $this->response(array('status' => 'fail', 502));
+            $this->response($errconfirm, 502);
         }
     }
 
@@ -112,7 +117,12 @@ class Approvedata extends REST_Controller {
 
         $confirmation = array(
             'code' => '4002',
-            'message' => 'Update pending data successfully executed'
+            'message' => 'Data successfully updated.'
+        );
+
+        $errconfirm = array(
+            'code' => '14002',
+            'message' => 'Failed to update data.'
         );
 
         if ($update) {
@@ -120,7 +130,7 @@ class Approvedata extends REST_Controller {
             $this->Sanctionlist_model->delete_pending();
             $this->response($confirmation, 200);
         } else {
-            $this->response(array('status' => 'fail', 502));
+            $this->response($errconfirm, 502);
         }
     }
 
@@ -146,7 +156,7 @@ class Approvedata extends REST_Controller {
 
         $confirmation = array(
             'code' => '4003',
-            'message' => 'Delete pending data successfully executed'
+            'message' => 'Data successfully deleted.'
         );
 
         if ($delete) {

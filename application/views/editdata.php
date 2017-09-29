@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sanction List: Insert New Customer Data</title>
+    <title>Sanction List: Edit Data</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" media="screen">
@@ -74,40 +74,42 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php
             if (isset($message)) {
-                echo "<div class='message' style='color: #aa0000'>";
+            echo "<div class='message' style='color: #aa0000'>";
                 echo $message;
                 echo "</div>";
             }
             ?>
-            <h1 class="page-header">Insert New Customer Data</h1>
-            <?php echo form_open('sanction/baru'); ?>
+            <h1 class="page-header">Edit Existing Customer Data</h1>
+            <?php echo form_open('sanction/edit'); ?>
             <form>
+                <input type="hidden" name="list_id" class="form-control" id="inputListId" value="<?php echo $custdata[0]->list_id; ?>">
                 <div class="form-group">
                     <label for="inputFullname">Customer Full Name</label>
-                    <input type="text" name="full_name" class="form-control" id="inputFullname" placeholder="customer full name">
+                    <input type="text" name="full_name" class="form-control" id="inputFullname" value="<?php echo $custdata[0]->full_name; ?>" placeholder="customer full name">
+
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">Customer Email</label>
-                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                    <input type="email" name="email" class="form-control" id="inputEmail" value="<?php echo $custdata[0]->email; ?>" placeholder="name@example.com">
                 </div>
                 <div class="form-group">
                     <label for="dtp_input2">Customer Birthdate</label>
                     <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <input class="form-control" size="16" type="text" value="<?php echo date_format(new DateTime($custdata[0]->birthdate), "d M Y"); ?>" readonly>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
-                    <input type="hidden" name="birthdate" id="dtp_input2" value="" /><br/>
+                    <input type="hidden" name="birthdate" id="dtp_input2" value="<?php echo $custdata[0]->birthdate; ?>" /><br/>
                 </div>
                 <div class="form-group">
                     <label for="inputPhoneNumber">Customer Phone Number</label>
-                    <input type="text" name="phone_number" class="form-control" id="inputPhoneNumber" onkeypress="return isNumber(event)" placeholder="number only">
+                    <input type="text" name="phone_number" class="form-control" id="inputPhoneNumber" value="<?php echo $custdata[0]->phone_number; ?>" onkeypress="return isNumber(event)" placeholder="number only">
                 </div>
                 <div class="form-group">
                     <label for="inputGender">Customer Gender</label>
                     <select class="form-control" id="inputGender" name="gender">
-                        <option>Male</option>
-                        <option>Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
                 </div>
                 <button name="submit" type="submit" class="btn btn-default">Save Data</button>
@@ -153,6 +155,11 @@
         }
         return true;
     }
+
+    $(document).ready(function() {
+        var GenderSelected = "<?php Print($custdata[0]->gender); ?>";
+        $("#inputGender").val(GenderSelected);
+    });
 </script>
 </body>
 </html>

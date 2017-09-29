@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Sanction List: Main Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
@@ -41,7 +41,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php echo base_url('sanction/logout'); ?>">Logout</a></li>
+                <li><a href="<?php echo base_url('sanction/logout'); ?>">logout</a></li>
             </ul>
             <!--<form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -54,11 +54,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="<?php echo base_url(); ?>">Show All Data <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Show Certain Data</a></li>
+                <li class="active"><a href="<?php echo base_url(); ?>">Data List <span class="sr-only">(current)</span></a></li>
                 <li><a href="<?php echo base_url('sanction/baru'); ?>">Save New Data</a></li>
-                <li><a href="#">Modify Data</a></li>
-                <li><a href="#">Delete Data</a></li>
             </ul>
 <!--            <ul class="nav nav-sidebar">-->
 <!--                <li><a href="">Nav item</a></li>-->
@@ -81,7 +78,10 @@
                 echo "</div>";
             }
             ?>
-            <h1 class="page-header">Get Data</h1>
+            <?php if($this->session->flashdata('msg')): ?>
+                <p style="color: #204d74"><?php echo $this->session->flashdata('msg'); ?></p>
+            <?php endif; ?>
+            <h1 class="page-header">Data List</h1>
 
             <h2 class="sub-header">Sanction List Customer</h2>
             <div class="table-responsive">
@@ -97,6 +97,8 @@
                         <th>INPUT BY</th>
                         <th>APPROVED TIME</th>
                         <th>APPROVED BY</th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -105,12 +107,14 @@
                             <th><?php echo $row->full_name ?></th>
                             <th><?php echo $row->email ?></th>
                             <th><?php echo $row->phone_number ?></th>
-                            <th><?php echo $row->birthdate ?></th>
+                            <th><?php echo date_format(new DateTime($row->birthdate), "d M Y") ?></th>
                             <th><?php echo $row->gender ?></th>
-                            <th><?php echo $row->input_time ?></th>
+                            <th><?php echo date_format(new DateTime($row->input_time), "d M Y H:i:s") ?></th>
                             <th><?php echo $row->input_by ?></th>
-                            <th><?php echo $row->approved_time ?></th>
+                            <th><?php echo date_format(new DateTime($row->approved_time), "d M Y H:i:s") ?></th>
                             <th><?php echo $row->approved_by ?></th>
+                            <th><?php echo anchor('sanction/edit/'.$row->list_id, 'Edit', 'class="link-class"') ?></th>
+                            <th><a href="#" onClick="delete_records('<?php echo $row->list_id;?>');" alt="delete_records" />Delete</a></th>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -130,5 +134,17 @@
 <script src="<?php echo base_url('assets/js/holder.min.js'); ?>"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="<?php echo base_url('assets/js/ie10-viewport-bug-workaround.js'); ?>"></script>
+<script>
+    function delete_records(list_id)
+    {
+        var baseUrl = "<?php echo base_url() ?>";
+        var conf= confirm("Do you really want delete this data?");
+        if (conf== true){
+             location = baseUrl + "sanction/delete/" + list_id;
+        }else{
+            return;
+        }
+    }
+</script>
 </body>
 </html>

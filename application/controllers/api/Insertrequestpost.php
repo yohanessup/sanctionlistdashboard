@@ -40,8 +40,13 @@ class Insertrequestpost extends REST_Controller {
         $checkTempTable = $this->Sanctionlist_model->check_data_temp();
         $checkOrigTable = $this->Sanctionlist_model->check_data_orig();
 
-        if(!empty($checkTempTable) || !empty($checkOrigTable)) {
-            $this->response(array('code' => '3001', 'message' => 'Sorry, data has already exist!'), 200);
+        if(!empty($checkTempTable)) {
+            $this->response(array('code' => '3001', 'message' => 'Sorry, data still in pending table!'), 200);
+            return;
+        }
+
+        if(!empty($checkOrigTable)) {
+            $this->response(array('code' => '3002', 'message' => 'Sorry, data has already exist!'), 200);
             return;
         }
 

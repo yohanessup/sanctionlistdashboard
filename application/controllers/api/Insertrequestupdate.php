@@ -32,10 +32,25 @@ class Insertrequestupdate extends REST_Controller {
         $this->load->model('Sanctionlist_model');
 
         $this->Sanctionlist_model->set_id($dataPost['list_id']);
-        $checkTempTable = $this->Sanctionlist_model->check_id_data_temp();
+        $checkIdTempTable = $this->Sanctionlist_model->check_id_data_temp();
 
-        if(!empty($checkTempTable)) {
-            $this->response(array('code' => '3001', 'message' => 'Sorry, data has already exist in pending table!'), 200);
+        $dataSearch = array(
+            'full_name' => $dataPost['full_name'],
+            'birthdate' => $dataPost['birthdate'],
+            'list_id' => $dataPost['list_id']
+        );
+
+        $this->Sanctionlist_model->set_data_search($dataSearch);
+        $checkOrigTable = $this->Sanctionlist_model->check_data_orig_update();
+
+
+        if(!empty($checkIdTempTable)) {
+            $this->response(array('code' => '3001', 'message' => 'Sorry, data still in pending table!'), 200);
+            return;
+        }
+
+        if(!empty($checkOrigTable)) {
+            $this->response(array('code' => '3002', 'message' => 'Sorry, data has already exist!'), 200);
             return;
         }
 

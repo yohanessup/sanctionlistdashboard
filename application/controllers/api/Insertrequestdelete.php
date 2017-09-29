@@ -35,7 +35,7 @@ class Insertrequestdelete extends REST_Controller {
         $checkTempTable = $this->Sanctionlist_model->check_id_data_temp();
 
         if(!empty($checkTempTable)) {
-            $this->response(array('code' => '3001', 'message' => 'Sorry, data has already exist in pending table!'), 200);
+            $this->response(array('code' => '3001', 'message' => 'Sorry, data still in pending table!'), 200);
             return;
         }
 

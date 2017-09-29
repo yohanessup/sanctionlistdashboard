@@ -94,7 +94,7 @@ class Sanctionlist_model extends CI_Model{
         return $query->result();
     }
 
-    function get_pending_data() {
+    function get_cust_data() {
         $this->db->where('list_id', $this->id);
         $query = $this->db->get($this::tableName);
 
@@ -184,6 +184,17 @@ class Sanctionlist_model extends CI_Model{
 
     function check_data_orig() {
         $this->db->where($this->dataSearch);
+
+        $query = $this->db->get($this::tableName);
+
+        return $query->result();
+    }
+
+    function check_data_orig_update() {
+        $this->db->where('full_name =', $this->dataSearch['full_name']);
+        $this->db->where('birthdate =', $this->dataSearch['birthdate']);
+        $this->db->where('list_id !=', $this->dataSearch['list_id']);
+
         $query = $this->db->get($this::tableName);
 
         return $query->result();
