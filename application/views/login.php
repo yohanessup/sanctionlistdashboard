@@ -35,17 +35,22 @@
 
       <?php echo form_open('sanction'); ?>
       <form class="form-signin">
+          <img src="<?php echo base_url('assets/images/futuready.png'); ?>" width="190px" height="48px">
+          <h1>Sanction List System</h1>
           <h2 class="form-signin-heading">Please sign in</h2>
           <label for="inputUserId" class="sr-only">User ID/E-mail address</label>
-          <input type="email" name="user_id" id="inputUserId" class="form-control" placeholder="User ID/Email address" required autofocus>
+          <input type="email" name="user_id" id="inputUserId" class="form-control" placeholder="Your User ID (Email address)" required autofocus>
           <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Your Password" required>
           <div class="checkbox">
               <label>
                   <input type="checkbox" value="remember-me"> Remember me
               </label>
           </div>
           <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
+          <div style="text-align: center; margin-top: 40px;">
+            <img src="<?php echo base_url('assets/images/aegon-ft-logo.png'); ?>">
+          </div>
       </form>
       <?php echo form_close(); ?>
 
