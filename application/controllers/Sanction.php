@@ -7,7 +7,7 @@ class Sanction extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->baseURL = $this->config->item('base_url');
-        $this->API=$this->baseURL.'/api';
+        $this->API='http://localhost:8080/sanctionlistapi/api';
         $this->load->library('session');
         $this->load->library('curl');
         $this->load->helper('form');
