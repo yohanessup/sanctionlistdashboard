@@ -41,7 +41,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php echo base_url('sanction/logout'); ?>">logout</a></li>
+                <li><a href="<?php echo base_url('sanction/logout'); ?>">logout (<?php echo $this->session->userdata('logged_in')['username']; ?>)</a></li>
             </ul>
             <!--<form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
