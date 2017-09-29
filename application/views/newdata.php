@@ -59,7 +59,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="<?php echo base_url(); ?>">Data List <span class="sr-only">(current)</span></a></li>
-                <li class="active"><a href="<?php echo base_url('sanction/baru'); ?>">Save New Data</a></li>
+                <li class="active"><a href="#">Save New Data</a></li>
             </ul>
             <!--            <ul class="nav nav-sidebar">-->
             <!--                <li><a href="">Nav item</a></li>-->
