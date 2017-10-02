@@ -124,9 +124,11 @@
                 </table>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 40px; margin-bottom: 5px;">
-            <img src="<?php echo base_url('assets/images/aegon-ft-logo.png'); ?>">
-        </div>
+        <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+            <div class="container" style="text-align: center; margin-top: 12.5px;">
+                <img src="<?php echo base_url('assets/images/aegon-ft-logo.png'); ?>">
+            </div>
+        </nav>
     </div>
 </div>
 
@@ -193,6 +195,10 @@
 
     html {
         height: 100%;
+    }
+
+    body {
+        padding-bottom: 70px;
     }
 
     .digital-clock {
